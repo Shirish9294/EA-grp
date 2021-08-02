@@ -1,0 +1,25 @@
+{% extends 'shop/base.html' %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% load account socialaccount %}
+{% block content %}
+    <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-8 col-12">
+            <br>
+            <h2>Log in</h2>
+            <form method="post" novalidate>
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ next }}">
+                {{ form.username|as_crispy_field }}
+                {{ form.password|as_crispy_field }}
+                <button type="submit" class="btn btn-secondary">Log in</button>
+                <p><br><a href="{% url "password_reset" %}" style="font-size: 20px;">Forgotten your password?</a></p>
+                <h5>OR</h5>
+                <br>
+                <p class="btn btn-primary btn-lg disabled" role="button">
+                    <a href="{% provider_login_url 'google' %}" style="color: #ffffff"><img width="15px" style="margin-bottom:3px; margin-right:5px" alt="Google login" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />sign in with google</a></p>
+                <br>
+            </form>
+        </div>
+    </div>
+{% endblock %}
